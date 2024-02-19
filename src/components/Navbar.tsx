@@ -1,11 +1,14 @@
 import Box from "@mui/material/Box";
 import Logo from "./Logo";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/authSlice";
 import { RootState } from "@/redux/store";
 import PrimaryButton from "./buttons/PrimaryButton";
 import SecondaryButton from "./buttons/SecondaryButton";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+
   const isAuthenticated = useAppSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
@@ -25,7 +28,7 @@ const Navbar = () => {
       <Logo />
       <Box display="flex" gap={2}>
         <PrimaryButton label="Create" width="small" />
-        <SecondaryButton label="Logout" />
+        <SecondaryButton label="Logout" onClick={() => dispatch(logout())} />
       </Box>
     </Box>
   );
