@@ -3,9 +3,9 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import dayjs from "dayjs";
 import eventImage from "@assets/image3.png";
 import { UpcomingEvent } from "@/types/custom";
+import { formatDateTime } from "@/utils/formatDateTime";
 
 interface Props {
   event: UpcomingEvent;
@@ -25,7 +25,7 @@ const EventCard = ({ event }: Props) => {
             {event.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {dayjs(event.date).format("dddd, MMM M")}
+            {formatDateTime(event)}
           </Typography>
         </CardContent>
       </Card>
