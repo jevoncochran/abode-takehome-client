@@ -11,7 +11,7 @@ const buttonWidth = {
   large: "100%",
 };
 
-const ActionButton = ({ label, width }: Props) => {
+const PrimaryButton = ({ label, width }: Props) => {
   return (
     <Button
       variant="contained"
@@ -23,4 +23,4 @@ const ActionButton = ({ label, width }: Props) => {
   );
 };
 
-export default ActionButton;
+export default PrimaryButton;

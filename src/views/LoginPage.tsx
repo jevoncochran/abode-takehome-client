@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import loginImage from "@assets/login.png";
 import { useTheme } from "@mui/material";
 import Logo from "@/components/Logo";
-import InputGrouping from "@/components/InputGrouping";
-import ActionButton from "@/components/buttons/ActionButton";
+import InputGrouping from "@/components/inputs/InputGrouping";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 import OverlayButton from "@/components/buttons/OverlayButton";
 import axios from "axios";
 import { useAppDispatch } from "@/redux/hooks";
@@ -109,7 +109,7 @@ const LoginPage = () => {
               placeholder="Enter your password"
               onChange={handleChange}
             />
-            <ActionButton label="Login" width="medium" />
+            <PrimaryButton label="Login" width="medium" />
           </form>
         </Box>
       </Box>

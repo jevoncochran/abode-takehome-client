@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import signUpImage from "@assets/sign-up.png";
 import { useTheme } from "@mui/material";
 import Logo from "@/components/Logo";
-import InputGrouping from "@/components/InputGrouping";
-import ActionButton from "@/components/buttons/ActionButton";
+import InputGrouping from "@/components/inputs/InputGrouping";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 import OverlayButton from "@/components/buttons/OverlayButton";
 import axios from "axios";
 import { useAppDispatch } from "@/redux/hooks";
@@ -139,7 +139,7 @@ const SignUpPage = () => {
               placeholder="Confirm your password"
               onChange={handleChange}
             />
-            <ActionButton label="Sign Up" width="medium" />
+            <PrimaryButton label="Sign Up" width="medium" />
           </form>
         </Box>
       </Box>
