@@ -10,9 +10,12 @@ import OverlayButton from "@/components/buttons/OverlayButton";
 import axios from "axios";
 import { useAppDispatch } from "@/redux/hooks";
 import { retrieveUser } from "@/redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const theme = useTheme();
 
@@ -30,6 +33,7 @@ const LoginPage = () => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(retrieveUser(res.data.user));
+          navigate("/events");
         }
       });
   };

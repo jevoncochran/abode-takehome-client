@@ -4,7 +4,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PageLayout from "@components/PageLayout.tsx";
 import LoginPage from "@views/LoginPage.tsx";
+import EventsPage from "@/views/EventsPage";
 import Loading from "@components/Loading.tsx";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import { ThemeProvider } from "@mui/material/styles";
 import { appTheme } from "@themes/theme.ts";
 import { Provider } from "react-redux";
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        path: "/events",
+        element: (
+          <ProtectedRoute>
+            <EventsPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
