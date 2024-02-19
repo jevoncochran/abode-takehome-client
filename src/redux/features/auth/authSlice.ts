@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface AuthState {
   user: AuthenticatedUser | null;
   isAuthenticated: boolean;
+  token: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
+  token: null,
 };
 
 export const authSlice = createSlice({
@@ -16,8 +18,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     retrieveUser: (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
       state.isAuthenticated = true;
+      state.token = action.payload.token;
     },
     logout: (state) => {
       state.user = null;

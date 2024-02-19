@@ -38,7 +38,9 @@ const SignUpPage = () => {
       .post(`${import.meta.env.VITE_API_URL}/users/register`, credentials)
       .then((res) => {
         if (res.status === 201) {
-          dispatch(retrieveUser(res.data.user));
+          dispatch(
+            retrieveUser({ user: res.data.user, token: res.data.token })
+          );
           navigate("/events");
         }
       });
