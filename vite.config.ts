@@ -9,6 +9,7 @@ export default defineConfig({
       "@": "/src",
       "@assets": "/src/assets",
       "@components": "/src/components",
+      "@redux": "/src/redux",
       "@themes": "/src/themes",
       "@views": "/src/views",
     },

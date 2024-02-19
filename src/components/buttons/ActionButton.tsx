@@ -16,6 +16,7 @@ const ActionButton = ({ label, width }: Props) => {
     <Button
       variant="contained"
       sx={{ width: buttonWidth[width], color: "#FFF" }}
+      type="submit"
     >
       {label}
     </Button>

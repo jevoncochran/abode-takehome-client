@@ -7,8 +7,13 @@ import Logo from "@/components/Logo";
 import InputGrouping from "@/components/InputGrouping";
 import ActionButton from "@/components/buttons/ActionButton";
 import OverlayButton from "@/components/buttons/OverlayButton";
+import axios from "axios";
+import { useAppDispatch } from "@/redux/hooks";
+import { retrieveUser } from "@/redux/features/auth/authSlice";
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+
   const theme = useTheme();
 
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -20,7 +25,13 @@ const LoginPage = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/users/login`, credentials)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(retrieveUser(res.data.user));
+        }
+      });
   };
 
   return (
@@ -68,12 +79,7 @@ const LoginPage = () => {
         alignItems="center"
       >
         <Logo />
-        <Box
-          width="100%"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
+        <Box width="100%">
           <form
             onSubmit={handleSubmit}
             style={{
