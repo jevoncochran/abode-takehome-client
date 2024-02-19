@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import loginImage from "@assets/login.png";
+import signUpImage from "@assets/sign-up.png";
 import { useTheme } from "@mui/material";
 import Logo from "@/components/Logo";
 import InputGrouping from "@/components/InputGrouping";
@@ -12,14 +12,20 @@ import { useAppDispatch } from "@/redux/hooks";
 import { retrieveUser } from "@/redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   const theme = useTheme();
 
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -29,9 +35,9 @@ const LoginPage = () => {
     e.preventDefault();
 
     axios
-      .post(`${import.meta.env.VITE_API_URL}/users/login`, credentials)
+      .post(`${import.meta.env.VITE_API_URL}/users/register`, credentials)
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           dispatch(retrieveUser(res.data.user));
           navigate("/events");
         }
@@ -49,7 +55,7 @@ const LoginPage = () => {
         position="relative"
       >
         <img
-          src={loginImage}
+          src={signUpImage}
           className="families"
           alt="Login"
           width="100%"
@@ -64,19 +70,19 @@ const LoginPage = () => {
             fontWeight={700}
             marginBottom="24px"
           >
-            Welcome back
+            Welcome!
           </Typography>
           <Typography color={theme.palette.secondary.main} marginBottom="12px">
-            Need an account?
+            Already have an account?
           </Typography>
-          <OverlayButton label="Sign Up" onClick={() => navigate("/signup")} />
+          <OverlayButton label="Login" onClick={() => navigate("/login")} />
         </Box>
       </Box>
 
       {/* Right Container */}
       <Box
         width="60%"
-        padding="200px 100px"
+        padding="100px 100px"
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
@@ -94,6 +100,22 @@ const LoginPage = () => {
             }}
           >
             <InputGrouping
+              inputName="firstName"
+              label="FIRST NAME"
+              value={credentials.firstName}
+              type="text"
+              placeholder="Enter your first name"
+              onChange={handleChange}
+            />
+            <InputGrouping
+              inputName="lastName"
+              label="LAST NAME"
+              value={credentials.lastName}
+              type="text"
+              placeholder="Enter your last name"
+              onChange={handleChange}
+            />
+            <InputGrouping
               inputName="email"
               label="YOUR EMAIL"
               value={credentials.email}
@@ -109,7 +131,15 @@ const LoginPage = () => {
               placeholder="Enter your password"
               onChange={handleChange}
             />
-            <ActionButton label="Login" width="medium" />
+            <InputGrouping
+              inputName="passwordConfirm"
+              label="CONFIRM PASSWORD"
+              value={credentials.passwordConfirm}
+              type="password"
+              placeholder="Confirm your password"
+              onChange={handleChange}
+            />
+            <ActionButton label="Sign Up" width="medium" />
           </form>
         </Box>
       </Box>
@@ -117,4 +147,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
