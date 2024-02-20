@@ -5,9 +5,12 @@ import { logout } from "@/redux/features/auth/authSlice";
 import { RootState } from "@/redux/store";
 import PrimaryButton from "./buttons/PrimaryButton";
 import SecondaryButton from "./buttons/SecondaryButton";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const isAuthenticated = useAppSelector(
     (state: RootState) => state.auth.isAuthenticated
@@ -27,7 +30,11 @@ const Navbar = () => {
     >
       <Logo />
       <Box display="flex" gap={2}>
-        <PrimaryButton label="Create" width="small" />
+        <PrimaryButton
+          label="Create"
+          width="small"
+          onClick={() => navigate("/events/create")}
+        />
         <SecondaryButton label="Logout" onClick={() => dispatch(logout())} />
       </Box>
     </Box>

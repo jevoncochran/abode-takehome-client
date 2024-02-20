@@ -14,14 +14,14 @@ interface Props {
 const EventCard = ({ event }: Props) => {
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345, padding: "12px" }}>
+      <Card sx={{ padding: "12px" }}>
         <CardMedia
-          sx={{ height: 140 }}
+          sx={{ height: 200 }}
           image={eventImage}
           title="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="body1" component="div">
             {event.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">

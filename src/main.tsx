@@ -13,6 +13,9 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@redux/store";
 import SignUpPage from "@/views/SignUpPage";
+import CreateEventPage from "./views/CreateEventPage";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,14 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/events/create",
+        element: (
+          <ProtectedRoute>
+            <CreateEventPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
@@ -45,7 +56,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <PersistGate loading={null} persistor={persistor}>
         <Suspense fallback={<Loading />}>
           <ThemeProvider theme={appTheme}>
-            <RouterProvider router={router} />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <RouterProvider router={router} />
+            </LocalizationProvider>
           </ThemeProvider>
         </Suspense>
       </PersistGate>
