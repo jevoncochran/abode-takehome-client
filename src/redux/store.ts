@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import authReducer from "@redux/features/auth/authSlice";
+import eventReducer from "@redux/features/event/eventSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  event: eventReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

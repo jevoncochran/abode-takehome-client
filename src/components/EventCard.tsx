@@ -6,15 +6,27 @@ import Grid from "@mui/material/Grid";
 import eventImage from "@assets/image3.png";
 import { UpcomingEvent } from "@/types/custom";
 import { formatDateTime } from "@/utils/formatDateTime";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hooks";
+import { setSelectedEvent } from "@/redux/features/event/eventSlice";
 
 interface Props {
   event: UpcomingEvent;
 }
 
 const EventCard = ({ event }: Props) => {
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => {
+    dispatch(setSelectedEvent(event));
+    navigate(`/events/${event.id}`);
+  };
+
   return (
-    <Grid item xs={3}>
-      <Card sx={{ padding: "12px" }}>
+    <Grid item xs={3} sx={{ cursor: "pointer" }}>
+      <Card onClick={handleClick} sx={{ padding: "12px" }}>
         <CardMedia
           sx={{ height: 200 }}
           image={eventImage}

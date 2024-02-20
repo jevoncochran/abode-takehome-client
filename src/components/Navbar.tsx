@@ -28,7 +28,7 @@ const Navbar = () => {
       alignItems="center"
       height="80px"
     >
-      <Box onClick={() => navigate("/events")}>
+      <Box onClick={() => navigate("/events")} sx={{ cursor: "pointer" }}>
         <Logo />
       </Box>
       <Box display="flex" gap={2}>
