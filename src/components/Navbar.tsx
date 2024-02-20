@@ -28,7 +28,9 @@ const Navbar = () => {
       alignItems="center"
       height="80px"
     >
-      <Logo />
+      <Box onClick={() => navigate("/events")}>
+        <Logo />
+      </Box>
       <Box display="flex" gap={2}>
         <PrimaryButton
           label="Create"
