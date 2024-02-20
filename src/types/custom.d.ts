@@ -14,22 +14,14 @@ export interface Event {
   id: UniqueId;
   title: string;
   date: Date;
-  startTime?: Date;
-  endTime?: Date;
+  startTime?: Date | null;
+  endTime?: Date | null;
   userId: UniqueId;
   isAllDay?: boolean;
-  // TODO: Add description
+  description?: string;
 }
 
-// TODO: Simplify this by extending Event
-export interface UpcomingEvent {
-  id: UniqueId;
-  title: string;
-  date: Date;
-  startTime?: Date;
-  endTime?: Date;
-  userId: UniqueId;
-  isAllDay?: boolean;
+export interface UpcomingEvent extends Event {
   userRelation: UserRelation;
   invite?: EventInviteData;
 }

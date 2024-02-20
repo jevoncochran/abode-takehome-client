@@ -16,4 +16,25 @@ const formatDateTime = (event: UpcomingEvent) => {
   return `${date}, ${time}`;
 };
 
-export { formatDateTime };
+const formatTime = (event: UpcomingEvent) => {
+  let time: string;
+
+  if (event.isAllDay) {
+    time = "All Day Event";
+  } else {
+    const eventStart = dayjs(event.startTime).format("h:mmA");
+    const eventEnd = event.endTime
+      ? dayjs(event.endTime).format("h:mmA")
+      : null;
+
+    if (eventEnd) {
+      time = `${eventStart} - ${eventEnd}`;
+    } else {
+      time = eventStart;
+    }
+  }
+
+  return time;
+};
+
+export { formatDateTime, formatTime };

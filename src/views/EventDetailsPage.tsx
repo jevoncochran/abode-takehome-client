@@ -7,8 +7,9 @@ import { useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { formatDateTime } from "@/utils/formatDateTime";
+import { formatDateTime, formatTime } from "@/utils/formatDateTime";
 import OverlayButton from "@/components/buttons/OverlayButton";
+import { UpcomingEvent } from "@/types/custom";
 
 const EventDetailsPage = () => {
   const navigate = useNavigate();
@@ -86,6 +87,11 @@ const EventDetailsPage = () => {
       </Box>
 
       {/* TODO: Add divs for description and scheduled time */}
+      <Typography>Description</Typography>
+      <Typography>{event?.description}</Typography>
+
+      <Typography>Scheduled Time</Typography>
+      <Typography>{formatTime(event as UpcomingEvent)}</Typography>
     </div>
   );
 };

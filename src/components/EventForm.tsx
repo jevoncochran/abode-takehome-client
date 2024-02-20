@@ -37,8 +37,8 @@ const EventForm = ({ type, event }: Props) => {
     if (eventData.isAllDay) {
       const timesRemoved: EventInput = {
         ...eventData,
-        startTime: undefined,
-        endTime: undefined,
+        startTime: null,
+        endTime: null,
       };
 
       return timesRemoved;
@@ -140,7 +140,7 @@ const EventForm = ({ type, event }: Props) => {
           <Box width="48%" display="flex">
             <FormControlLabel
               value="end"
-              control={<Checkbox value={eventState.isAllDay} />}
+              control={<Checkbox checked={eventState.isAllDay} />}
               label="Check here if this is an all day event"
               labelPlacement="end"
               onChange={(e, checked) =>
@@ -162,7 +162,15 @@ const EventForm = ({ type, event }: Props) => {
               name="startTime"
               value={eventState.startTime}
               onChange={(value) =>
-                setEventState({ ...eventState, startTime: value })
+                setEventState({
+                  ...eventState,
+                  // Update the startTime to user selected value
+                  // Make sure the startTime "date" matches eventState.date
+                  startTime: dayjs(value)
+                    .month(eventState.date.month())
+                    .date(eventState.date.date())
+                    .year(eventState.date.year()),
+                })
               }
               disabled={eventState.isAllDay}
               sx={{ width: "100%" }}
@@ -198,6 +206,11 @@ const EventForm = ({ type, event }: Props) => {
           <Textarea
             minRows={3}
             placeholder="Please enter a description for your event (optional)"
+            name="description"
+            value={eventState.description}
+            onChange={(e) =>
+              setEventState({ ...eventState, description: e.target.value })
+            }
             style={{ width: "100%" }}
           />
         </Box>
