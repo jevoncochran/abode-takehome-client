@@ -17,6 +17,7 @@ import CreateEventPage from "./views/CreateEventPage";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import EventDetailsPage from "./views/EventDetailsPage";
+import EditEventPage from "./views/EditEventPage";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <EventDetailsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/events/:eventId/edit",
+        element: (
+          <ProtectedRoute>
+            <EditEventPage />
           </ProtectedRoute>
         ),
       },
