@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import InputGrouping from "@/components/inputs/InputGrouping";
-import { EventInput } from "@/types/custom";
+import { EventInput, UpcomingEvent } from "@/types/custom";
 import InputLabel from "@mui/material/InputLabel";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   type: "create" | "edit";
-  event: EventInput;
+  event: EventInput | UpcomingEvent;
 }
 
 const EventForm = ({ type, event }: Props) => {
@@ -29,7 +29,11 @@ const EventForm = ({ type, event }: Props) => {
   const [eventState, setEventState] = useState(event);
 
   // This simply removes startTime and endTime if eventState.isAllDay is truthy
-  const parseEventData = (eventData: EventInput) => {
+  const parseEventData = (eventData: EventInput | UpcomingEvent) => {
+    // TODO: Resolve this Typescript issue
+    delete eventData.userRelation;
+    delete eventData.invite;
+
     if (eventData.isAllDay) {
       const timesRemoved: EventInput = {
         ...eventData,
@@ -53,6 +57,21 @@ const EventForm = ({ type, event }: Props) => {
         .post(`${import.meta.env.VITE_API_URL}/events`, parsedEventData, {
           headers: { Authorization: `Bearer ${auth.token}` },
         })
+        .then((res) => {
+          console.log(res.data);
+          if (res.status === 201) {
+            navigate("/events");
+          }
+        });
+    } else {
+      axios
+        .put(
+          `${import.meta.env.VITE_API_URL}/events/${eventState.id}`,
+          parsedEventData,
+          {
+            headers: { Authorization: `Bearer ${auth.token}` },
+          }
+        )
         .then((res) => {
           console.log(res.data);
           if (res.status === 201) {
@@ -183,7 +202,10 @@ const EventForm = ({ type, event }: Props) => {
           />
         </Box>
 
-        <PrimaryButton label="Create Event" width="large" />
+        <PrimaryButton
+          label={type === "create" ? "Create Event" : "Update Event"}
+          width="large"
+        />
       </form>
     </Box>
   );
