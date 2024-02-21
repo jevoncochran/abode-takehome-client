@@ -1,4 +1,4 @@
-import { EventInput, UniqueId } from "@/types/custom";
+import { NewEvent, UniqueId } from "@/types/custom";
 import dayjs from "dayjs";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
@@ -19,14 +19,13 @@ const CreateEventPage = () => {
     .set("minute", 0)
     .set("second", 0);
 
-  const newEvent: EventInput = {
+  const newEvent: NewEvent = {
     title: "",
     date: oneWeekFromToday,
     startTime: oneWeekFromTodayTwelveNoon,
     endTime: undefined,
     userId: auth.user?.id as UniqueId,
     isAllDay: false,
-    // TODO: Add description
     description: "",
   };
 

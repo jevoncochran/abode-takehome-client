@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import InputGrouping from "@/components/inputs/InputGrouping";
-import { EventInput, UpcomingEvent } from "@/types/custom";
+import { EventInput, NewEvent, UpcomingEvent } from "@/types/custom";
 import InputLabel from "@mui/material/InputLabel";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -15,9 +15,14 @@ import axios from "axios";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { useNavigate } from "react-router-dom";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/AutoComplete";
+import TextField from "@mui/material/TextField";
+
+type EventFormType = "create" | "edit";
 
 interface Props {
-  type: "create" | "edit";
+  type: EventFormType;
   event: EventInput | UpcomingEvent;
 }
 
@@ -27,13 +32,18 @@ const EventForm = ({ type, event }: Props) => {
   const auth = useAppSelector((state: RootState) => state.auth);
 
   const [eventState, setEventState] = useState(event);
+  const [allUsers, setAllUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
-  // This simply removes startTime and endTime if eventState.isAllDay is truthy
-  const parseEventData = (eventData: EventInput | UpcomingEvent) => {
+  const parseEventData = (
+    formType: EventFormType,
+    eventData: NewEvent | UpcomingEvent
+  ) => {
     // TODO: Resolve this Typescript issue
     delete eventData.userRelation;
     delete eventData.invite;
 
+    // Remove startTime and endTime data for all day events
     if (eventData.isAllDay) {
       const timesRemoved: EventInput = {
         ...eventData,
@@ -41,16 +51,27 @@ const EventForm = ({ type, event }: Props) => {
         endTime: null,
       };
 
-      return timesRemoved;
-    } else {
-      return eventData;
+      eventData = timesRemoved;
     }
+
+    // Add relevant data for inviting guests
+    if (formType === "create") {
+      const selectedUserIds = selectedUsers.map((selected) => selected.id);
+      eventData = { ...eventData, usersToInvite: selectedUserIds };
+    }
+
+    return eventData;
+  };
+
+  const handleGuestListChange = (_, newValue) => {
+    setSelectedUsers(newValue);
+    // onGuestListChange(newValue);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const parsedEventData = parseEventData(eventState);
+    const parsedEventData = parseEventData(type, eventState);
 
     if (type === "create") {
       axios
@@ -98,9 +119,25 @@ const EventForm = ({ type, event }: Props) => {
     }));
   }, [eventState.date]);
 
+  // Fetch all users (for the purpose of adding guests)
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/users`, {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAllUsers(res.data);
+      });
+  }, []);
+
   useEffect(() => {
     console.log("newly created event: ", eventState);
   }, [eventState]);
+
+  useEffect(() => {
+    console.log("selectedUsers: ", selectedUsers);
+  }, [selectedUsers]);
 
   return (
     <Box padding="50px 250px">
@@ -212,6 +249,36 @@ const EventForm = ({ type, event }: Props) => {
               setEventState({ ...eventState, description: e.target.value })
             }
             style={{ width: "100%" }}
+          />
+        </Box>
+
+        <Box marginBottom="24px">
+          <InputLabel sx={{ marginBottom: "12px" }}>Guests</InputLabel>
+          <Autocomplete
+            multiple
+            id="guest-list-select"
+            options={allUsers}
+            getOptionLabel={(option) => option.email}
+            value={selectedUsers}
+            onChange={handleGuestListChange}
+            renderInput={(params) => (
+              <TextField {...params} label="Invite Guests" variant="outlined" />
+            )}
+            renderTags={(value, getTagProps) =>
+              value.map((option, index) => (
+                <Chip
+                  key={index}
+                  label={option.email}
+                  {...getTagProps({ index })}
+                  onDelete={() => {
+                    const newGuests = [...selectedUsers];
+                    newGuests.splice(index, 1);
+                    setSelectedUsers(newGuests);
+                    // onGuestListChange(newGuests);
+                  }}
+                />
+              ))
+            }
           />
         </Box>
 

@@ -21,6 +21,17 @@ export interface Event {
   description?: string;
 }
 
+export interface NewEvent {
+  title: string;
+  date: Date;
+  startTime?: Date | null;
+  endTime?: Date | null;
+  userId: UniqueId;
+  isAllDay?: boolean;
+  description?: string;
+  usersToInvite?: UniqueId[];
+}
+
 export interface UpcomingEvent extends Event {
   userRelation: UserRelation;
   invite?: EventInviteData;

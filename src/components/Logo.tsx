@@ -13,7 +13,7 @@ const Logo = () => {
         variant="h5"
         sx={{ marginRight: "4px" }}
       >
-        Adobe
+        Abode
       </Typography>
       <Typography
         color={theme.palette.primary.contrastText}
