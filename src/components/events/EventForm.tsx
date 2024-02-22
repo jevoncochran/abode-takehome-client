@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { TextareaAutosize as Textarea } from "@mui/base/TextareaAutosize";
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/AutoComplete";
 import TextField from "@mui/material/TextField";
@@ -229,38 +228,37 @@ const EventForm = ({ type, event }: Props) => {
           justifyContent="space-between"
           width="100%"
         >
-          <Box width="48%">
+          <Box width="100%">
             <InputLabel sx={{ marginBottom: "12px" }}>Date</InputLabel>
-            <DatePicker
-              name="date"
-              value={eventState.date}
-              onChange={(value) =>
-                setEventState({ ...eventState, date: value })
-              }
-              sx={{ width: "100%" }}
-            />
-          </Box>
-
-          <Box width="48%" display="flex">
-            <FormControlLabel
-              value="end"
-              control={<Checkbox checked={eventState.isAllDay} />}
-              label="Check here if this is an all day event"
-              labelPlacement="end"
-              onChange={(e, checked) =>
-                setEventState({ ...eventState, isAllDay: checked })
-              }
-            />
+            <Box display="flex" gap={8}>
+              <DatePicker
+                name="date"
+                value={eventState.date}
+                onChange={(value) =>
+                  setEventState({ ...eventState, date: value })
+                }
+                sx={{ width: "50%" }}
+              />
+              <FormControlLabel
+                value="end"
+                control={
+                  <Checkbox
+                    checked={eventState.isAllDay}
+                  />
+                }
+                label="Check here if this is an all day event"
+                labelPlacement="end"
+                onChange={(e, checked) =>
+                  setEventState({ ...eventState, isAllDay: checked })
+                }
+                sx={{ width: "50%" }}
+              />
+            </Box>
           </Box>
         </Box>
 
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          width="100%"
-          marginBottom="24px"
-        >
-          <Box width="48%">
+        <Box display="flex" gap={8} width="100%" marginBottom="24px">
+          <Box width="50%">
             <InputLabel sx={{ marginBottom: "12px" }}>Start Time</InputLabel>
             <TimePicker
               name="startTime"
@@ -281,7 +279,7 @@ const EventForm = ({ type, event }: Props) => {
             />
           </Box>
 
-          <Box width="48%">
+          <Box width="50%">
             <InputLabel sx={{ marginBottom: "12px" }}>End Time</InputLabel>
             <TimePicker
               name="endTime"
@@ -307,7 +305,8 @@ const EventForm = ({ type, event }: Props) => {
           <InputLabel sx={{ marginBottom: "12px" }}>
             Event Description
           </InputLabel>
-          <Textarea
+          <TextField
+            multiline
             minRows={3}
             placeholder="Please enter a description for your event (optional)"
             name="description"
@@ -315,7 +314,8 @@ const EventForm = ({ type, event }: Props) => {
             onChange={(e) =>
               setEventState({ ...eventState, description: e.target.value })
             }
-            style={{ width: "100%" }}
+            variant="outlined"
+            fullWidth
           />
         </Box>
 
@@ -360,7 +360,12 @@ const EventForm = ({ type, event }: Props) => {
             value={selectedUsers}
             onChange={handleGuestListChange}
             renderInput={(params) => (
-              <TextField {...params} label="Invite Guests" variant="outlined" />
+              <TextField
+                {...params}
+                label="Invite Guests"
+                variant="outlined"
+                InputLabelProps={{ shrink: false }}
+              />
             )}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
