@@ -94,7 +94,6 @@ const EventForm = ({ type, event }: Props) => {
 
   const handleGuestListChange = (_, newValue) => {
     setSelectedUsers(newValue);
-    // onGuestListChange(newValue);
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -156,7 +155,11 @@ const EventForm = ({ type, event }: Props) => {
       })
       .then((res) => {
         console.log(res.data);
-        setAllUsers(res.data);
+        const userList = res.data;
+        const userListMinusLoggedInUser = userList.filter(
+          (user) => user.id !== auth.user?.id
+        );
+        setAllUsers(userListMinusLoggedInUser);
       });
   }, []);
 
@@ -334,7 +337,6 @@ const EventForm = ({ type, event }: Props) => {
                     const newGuests = [...selectedUsers];
                     newGuests.splice(index, 1);
                     setSelectedUsers(newGuests);
-                    // onGuestListChange(newGuests);
                   }}
                 />
               ))

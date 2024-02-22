@@ -2,7 +2,7 @@ import { NewEvent, UniqueId } from "@/types/custom";
 import dayjs from "dayjs";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import EventForm from "@/components/EventForm";
+import EventForm from "@/components/events/EventForm";
 
 const CreateEventPage = () => {
   const auth = useAppSelector((state: RootState) => state.auth);

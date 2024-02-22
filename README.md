@@ -1,30 +1,38 @@
-# React + TypeScript + Vite
+# Project Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This project is a web application designed to facilitate event management, with a focus on user authentication and interaction. The frontend is built using **React** and **TypeScript**, leveraging **Vite** as the build tool. **Material UI** has been employed for styling, ensuring a sleek and responsive user interface. Global state management is achieved through **Redux**, while **React Router DOM** handles navigation.
 
-Currently, two official plugins are available:
+## Features
+- **Authentication:** The application includes Login and Sign-up pages for user authentication.
+- **Dashboard:** Upon successful authentication, users are directed to a dashboard that displays a list of events associated with them.
+- **Event Association:** Users can be associated with events either by creating them or by receiving invitations.
+- **Event Management:** The dashboard allows users to create new events, view event details, and perform operations like editing or deleting events they have created.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Setup Instructions
 
-## Expanding the ESLint configuration
+To set up and run this project, follow these steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Clone the Repository:**
 
-- Configure the top-level `parserOptions` property like this:
+git clone [repository_url]
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. **Navigate to the Project Directory:**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+cd [project_directory]
+
+3. **Install Dependencies:**
+
+npm i
+
+4. **Run the Project:**
+
+npm run dev
+
+
+5. **Environment Configuration:**
+
+Create a `.env` file in the root directory of the project and add the following line:
+
+VITE_API_URL=http://localhost:8000/api
+

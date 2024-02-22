@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material";
-import EventCard from "@/components/EventCard";
+import EventCard from "@/components/events/EventCard";
 import axios from "axios";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";

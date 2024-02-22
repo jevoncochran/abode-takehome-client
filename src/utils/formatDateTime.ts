@@ -16,6 +16,9 @@ const formatDateTime = (event: ExistingEvent) => {
   return `${date}, ${time}`;
 };
 
+
+// Formats time of events as in the following example:
+// 9:00AM - 5:00PM
 const formatTime = (event: ExistingEvent) => {
   let time: string;
 
