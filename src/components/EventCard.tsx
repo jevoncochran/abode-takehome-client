@@ -4,14 +4,14 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import eventImage from "@assets/image3.png";
-import { UpcomingEvent } from "@/types/custom";
+import { ExistingEvent } from "@/types/custom";
 import { formatDateTime } from "@/utils/formatDateTime";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/redux/hooks";
 import { setSelectedEvent } from "@/redux/features/event/eventSlice";
 
 interface Props {
-  event: UpcomingEvent;
+  event: ExistingEvent;
 }
 
 const EventCard = ({ event }: Props) => {

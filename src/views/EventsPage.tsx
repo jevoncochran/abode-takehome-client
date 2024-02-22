@@ -9,14 +9,14 @@ import EventCard from "@/components/EventCard";
 import axios from "axios";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { UpcomingEvent } from "@/types/custom";
+import { ExistingEvent } from "@/types/custom";
 
 const EventsPage = () => {
   const theme = useTheme();
 
   const auth = useAppSelector((state: RootState) => state.auth);
 
-  const [events, setEvents] = useState<UpcomingEvent[]>([]);
+  const [events, setEvents] = useState<ExistingEvent[]>([]);
 
   useEffect(() => {
     axios

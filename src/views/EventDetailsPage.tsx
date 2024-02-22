@@ -9,7 +9,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { formatDateTime, formatTime } from "@/utils/formatDateTime";
 import OverlayButton from "@/components/buttons/OverlayButton";
-import { UpcomingEvent } from "@/types/custom";
+import { ExistingEvent } from "@/types/custom";
 
 const EventDetailsPage = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ const EventDetailsPage = () => {
   const theme = useTheme();
 
   const event = useAppSelector((state: RootState) => state.event.selectedEvent);
+  const user = useAppSelector((state: RootState) => state.auth.user);
 
   return (
     <div>
@@ -79,19 +80,41 @@ const EventDetailsPage = () => {
           >
             Add to calendar
           </Typography>
-          <OverlayButton
-            label="Edit"
-            onClick={() => navigate(`/events/${event.id}/edit`)}
-          />
+          {event?.userId.toString() === user.id.toString() && (
+            <OverlayButton
+              label="Edit"
+              onClick={() => navigate(`/events/${event.id}/edit`)}
+            />
+          )}
         </Box>
       </Box>
 
-      {/* TODO: Add divs for description and scheduled time */}
-      <Typography>Description</Typography>
-      <Typography>{event?.description}</Typography>
+      <Box marginTop="24px" display="flex" gap={2}>
+        <Box width="50%">
+          {event?.description ? (
+            <Box marginBottom="24px">
+              <Typography variant="h6">Description</Typography>
+              <Typography variant="body1">{event?.description}</Typography>
+            </Box>
+          ) : null}
 
-      <Typography>Scheduled Time</Typography>
-      <Typography>{formatTime(event as UpcomingEvent)}</Typography>
+          <Typography variant="h6">Scheduled Time</Typography>
+          <Typography
+            variant="body1"
+            color={theme.palette.primary.contrastText}
+          >
+            {formatTime(event as ExistingEvent)}
+          </Typography>
+        </Box>
+        {event?.guests?.length ? (
+          <Box width="50%">
+            <Typography variant="h6">Guests</Typography>
+            <Typography variant="body1">
+              {[event?.guests.map((guest) => guest.email).join(", ")]}
+            </Typography>
+          </Box>
+        ) : null}
+      </Box>
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import { UpcomingEvent } from "@/types/custom";
+import { ExistingEvent } from "@/types/custom";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface EventState {
-  selectedEvent: UpcomingEvent | null;
+  selectedEvent: ExistingEvent | null;
 }
 
 const initialState: EventState = {

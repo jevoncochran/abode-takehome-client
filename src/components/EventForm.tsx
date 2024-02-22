@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import InputGrouping from "@/components/inputs/InputGrouping";
-import { EventInput, NewEvent, UpcomingEvent } from "@/types/custom";
+import { EventInput, NewEvent, ExistingEvent } from "@/types/custom";
 import InputLabel from "@mui/material/InputLabel";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -23,7 +23,7 @@ type EventFormType = "create" | "edit";
 
 interface Props {
   type: EventFormType;
-  event: EventInput | UpcomingEvent;
+  event: EventInput | ExistingEvent;
 }
 
 const EventForm = ({ type, event }: Props) => {
@@ -33,11 +33,11 @@ const EventForm = ({ type, event }: Props) => {
 
   const [eventState, setEventState] = useState(event);
   const [allUsers, setAllUsers] = useState([]);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState(event.guests);
 
   const parseEventData = (
     formType: EventFormType,
-    eventData: NewEvent | UpcomingEvent
+    eventData: NewEvent | ExistingEvent
   ) => {
     // TODO: Resolve this Typescript issue
     delete eventData.userRelation;
@@ -56,7 +56,7 @@ const EventForm = ({ type, event }: Props) => {
 
     // Add relevant data for inviting guests
     if (formType === "create") {
-      const selectedUserIds = selectedUsers.map((selected) => selected.id);
+      const selectedUserIds = selectedUsers?.map((selected) => selected.id);
       eventData = { ...eventData, usersToInvite: selectedUserIds };
     }
 

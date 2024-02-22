@@ -32,9 +32,10 @@ export interface NewEvent {
   usersToInvite?: UniqueId[];
 }
 
-export interface UpcomingEvent extends Event {
+export interface ExistingEvent extends Event {
   userRelation: UserRelation;
   invite?: EventInviteData;
+  guests: Invite[];
 }
 
 export type EventInput = Omit<Event, "id">;
@@ -44,5 +45,13 @@ export type EventInviteData = {
   accepted: boolean | null;
   declined: boolean | null;
 };
+
+export interface Invite {
+  inviteId: UniqueId;
+  guestId: UniqueId;
+  email: string;
+  accepted: boolean;
+  declined: boolean;
+}
 
 export type AuthenticatedUser = Omit<User, "password">;
