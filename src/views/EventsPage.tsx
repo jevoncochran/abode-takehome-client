@@ -55,11 +55,15 @@ const EventsPage = () => {
           Events
         </Typography>
       </Box>
-      <Grid container spacing={2}>
-        {events.map((ev) => (
-          <EventCard event={ev} />
-        ))}
-      </Grid>
+      {events.length > 0 ? (
+        <Grid container spacing={2}>
+          {events.map((ev) => (
+            <EventCard event={ev} />
+          ))}
+        </Grid>
+      ) : (
+        <Typography>No upcoming events</Typography>
+      )}
     </div>
   );
 };
