@@ -1,5 +1,4 @@
 import ProminentImage from "@/components/ProminentImage";
-import eventDetailsImg from "@assets/event-details-img.png";
 import Box from "@mui/material/Box";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { Typography } from "@mui/material";
@@ -23,7 +22,15 @@ const EventDetailsPage = () => {
     <div>
       <Box position="relative">
         {/* Prominent Image */}
-        <ProminentImage src={eventDetailsImg} alt="Event details" />
+        {event?.image ? (
+          <ProminentImage src={event?.image as string} alt="Event details" />
+        ) : (
+          <Box
+            width="100%"
+            height="300px"
+            sx={{ backgroundColor: "#DDD" }}
+          ></Box>
+        )}
 
         {/* Back Button */}
         <Box

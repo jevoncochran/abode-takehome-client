@@ -27,6 +27,7 @@ const CreateEventPage = () => {
     userId: auth.user?.id as UniqueId,
     isAllDay: false,
     description: "",
+    image: null,
   };
 
   return <EventForm type="create" event={newEvent} />;

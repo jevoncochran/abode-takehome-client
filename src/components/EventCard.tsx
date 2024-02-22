@@ -3,7 +3,6 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import eventImage from "@assets/image3.png";
 import { ExistingEvent } from "@/types/custom";
 import { formatDateTime } from "@/utils/formatDateTime";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +28,11 @@ const EventCard = ({ event }: Props) => {
       <Card onClick={handleClick} sx={{ padding: "12px" }}>
         <CardMedia
           sx={{ height: 200 }}
-          image={eventImage}
+          image={
+            event.image
+              ? event.image
+              : "https://placehold.co/600x400?text=No Image"
+          }
           title="green iguana"
         />
         <CardContent>

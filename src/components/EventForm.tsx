@@ -1,4 +1,4 @@
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useRef, ChangeEvent } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import InputGrouping from "@/components/inputs/InputGrouping";
@@ -23,7 +23,7 @@ type EventFormType = "create" | "edit";
 
 interface Props {
   type: EventFormType;
-  event: EventInput | ExistingEvent;
+  event: NewEvent | ExistingEvent;
 }
 
 const EventForm = ({ type, event }: Props) => {
@@ -34,6 +34,8 @@ const EventForm = ({ type, event }: Props) => {
   const [eventState, setEventState] = useState(event);
   const [allUsers, setAllUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState(event.guests);
+
+  const imageUploadRef = useRef<HTMLInputElement>(null);
 
   const parseEventData = (
     formType: EventFormType,
@@ -61,6 +63,33 @@ const EventForm = ({ type, event }: Props) => {
     }
 
     return eventData;
+  };
+
+  const handleUploaderClick = () => {
+    if (imageUploadRef.current) {
+      imageUploadRef.current.click();
+    }
+  };
+
+  const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files?.length && files?.length > 0) {
+      //   setIsUploading(true);
+      const data = new FormData();
+
+      data.append("file", files[0]);
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/events/images`, data, {
+          headers: { Authorization: `Bearer ${auth.token}` },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setEventState((prevEventState) => {
+            return { ...prevEventState, image: res.data.link };
+          });
+          //   setIsUploading(false);
+        });
+    }
   };
 
   const handleGuestListChange = (_, newValue) => {
@@ -250,6 +279,37 @@ const EventForm = ({ type, event }: Props) => {
             }
             style={{ width: "100%" }}
           />
+        </Box>
+
+        <Box marginBottom="24px">
+          <InputLabel sx={{ marginBottom: "12px" }}>Event Image</InputLabel>
+          {!eventState.image ? (
+            <Box
+              width="100%"
+              height="300px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              sx={{ backgroundColor: "#ECECEC", cursor: "pointer" }}
+              onClick={handleUploaderClick}
+            >
+              <Typography>Click here to upload image</Typography>
+              <input
+                type="file"
+                ref={imageUploadRef}
+                style={{ visibility: "hidden", position: "absolute" }}
+                onChange={uploadImage}
+              />
+            </Box>
+          ) : (
+            <img
+              src={eventState.image}
+              alt={eventState.title}
+              width="100%"
+              height="300px"
+              style={{ objectFit: "cover" }}
+            />
+          )}
         </Box>
 
         <Box marginBottom="24px">

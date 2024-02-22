@@ -19,6 +19,7 @@ export interface Event {
   userId: UniqueId;
   isAllDay?: boolean;
   description?: string;
+  image: string | null;
 }
 
 export interface NewEvent {
@@ -29,6 +30,7 @@ export interface NewEvent {
   userId: UniqueId;
   isAllDay?: boolean;
   description?: string;
+  image: string | null;
   usersToInvite?: UniqueId[];
 }
 
