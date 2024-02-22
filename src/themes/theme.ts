@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material/styles";
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
     overlay: true;
+    delete: true;
   }
 }
 
@@ -37,6 +38,13 @@ export const appTheme = createTheme({
           style: {
             background: "#6E717D",
             "&:hover": { backgroundColor: "#6E717D" },
+          },
+        },
+        {
+          props: { variant: "delete" },
+          style: {
+            background: "#F25554",
+            "&:hover": { backgroundColor: "#F25554" },
           },
         },
       ],

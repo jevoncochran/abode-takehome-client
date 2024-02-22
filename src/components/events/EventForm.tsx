@@ -18,6 +18,12 @@ import { useNavigate } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/AutoComplete";
 import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import DeleteButton from "../buttons/DeleteButton";
 
 type EventFormType = "create" | "edit";
 
@@ -34,6 +40,7 @@ const EventForm = ({ type, event }: Props) => {
   const [eventState, setEventState] = useState(event);
   const [allUsers, setAllUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState(event.guests);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const imageUploadRef = useRef<HTMLInputElement>(null);
 
@@ -60,6 +67,8 @@ const EventForm = ({ type, event }: Props) => {
     if (formType === "create") {
       const selectedUserIds = selectedUsers?.map((selected) => selected.id);
       eventData = { ...eventData, usersToInvite: selectedUserIds };
+    } else {
+      delete eventData.guests;
     }
 
     return eventData;
@@ -128,6 +137,30 @@ const EventForm = ({ type, event }: Props) => {
           }
         });
     }
+  };
+
+  const handleDelete = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    axios
+      .delete(
+        `${import.meta.env.VITE_API_URL}/events/${eventState.id}`,
+        {
+          headers: { Authorization: `Bearer ${auth.token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 204) {
+          navigate("/events");
+        }
+      });
   };
 
   useEffect(() => {
@@ -344,10 +377,38 @@ const EventForm = ({ type, event }: Props) => {
           />
         </Box>
 
-        <PrimaryButton
-          label={type === "create" ? "Create Event" : "Update Event"}
-          width="large"
-        />
+        <Box display="flex" flexDirection="column" gap={1}>
+          <PrimaryButton
+            label={type === "create" ? "Create Event" : "Update Event"}
+            width="large"
+          />
+          <DeleteButton
+            label="Cancel Event"
+            width="large"
+            onClick={handleDelete}
+          />
+        </Box>
+
+        {/* Delete Event Modal */}
+        <Dialog
+          open={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to cancel this event? This action cannot be
+              undone.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeDeleteModal}>Disagree</Button>
+            <Button onClick={handleConfirmDelete} autoFocus>
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
       </form>
     </Box>
   );
