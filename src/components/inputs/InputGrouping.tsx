@@ -1,7 +1,8 @@
+import { HTMLInputTypeAttribute } from "react";
+// Material UI
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
-import { HTMLInputTypeAttribute } from "react";
 
 interface Props {
   inputName: string;

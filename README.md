@@ -1,30 +1,71 @@
-# React + TypeScript + Vite
+# Project Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This project is a web application designed to facilitate event management, with a focus on user authentication and interaction. The frontend is built using **React** and **TypeScript**, leveraging **Vite** as the build tool. **Material UI** has been employed for styling, ensuring a sleek and responsive user interface. Global state management is achieved through **Redux**, while **React Router DOM** handles navigation.
 
-Currently, two official plugins are available:
+## Features
+- **Authentication:** The application includes Login and Sign-up pages for user authentication.
+- **Dashboard:** Upon successful authentication, users are directed to a dashboard that displays a list of events associated with them.
+- **Event Association:** Users can be associated with events either by creating them or by receiving invitations.
+- **Event Management:** The dashboard allows users to create new events, view event details, and perform operations like editing or deleting events they have created.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Setup Instructions
 
-## Expanding the ESLint configuration
+To set up and run this project, follow these steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Clone the Repository:**
 
-- Configure the top-level `parserOptions` property like this:
+    `git clone [repository_url]`
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. **Navigate to the Project Directory:**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+    `cd [project_directory]`
+
+3. **Install Dependencies:**
+
+    `npm i`
+
+4. **Run the Project:**
+
+    `npm run dev`
+
+
+5. **Environment Configuration:**
+
+    Create a `.env` file in the root directory of the project and add the following line:
+
+    `VITE_API_URL=http://localhost:8000/api`
+
+# Future Improvements
+
+While the current version of the project provides essential functionality, there are several areas that could be enhanced with more time and resources. Here are some potential improvements and features to consider for future releases:
+
+1. **User Profiles:**
+   Introduce user profiles to allow users to customize their experience and provide additional information.
+
+2. **Real-time Updates:**
+   Implement real-time updates for the dashboard, ensuring users receive immediate notifications about new events or changes.
+
+3. **Enhanced Event Filtering:**
+   Improve event filtering options on the dashboard, allowing users to sort and search for events more efficiently.
+
+4. **Mobile Responsiveness:**
+   Optimize the application for mobile devices to provide a seamless experience across a variety of screen sizes.
+
+5. **Testing and Optimization:**
+   Conduct comprehensive testing and optimization to ensure the application's performance, scalability, and reliability.
+
+6. **Rich Text Event Descriptions:**
+   Allow users to add rich text descriptions when creating events, providing more detailed information.
+
+7. **Calendar Display:**
+   Introduce a calendar view on the events page, enabling users to switch between list view and calendar view for a more visual representation of their scheduled events.
+
+8. **Event Status and Cancellation:**
+   Implement an event status key (e.g., active, completed, canceled) to provide users with more nuanced control over event management. Users can cancel events instead of only deleting them.
+
+9. **Invitation Management:**
+   Allow users to accept or decline event invitations, providing a more interactive and user-friendly approach to managing their event associations.
+
+
+

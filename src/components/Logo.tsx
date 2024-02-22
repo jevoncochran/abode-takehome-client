@@ -1,3 +1,4 @@
+// Material UI
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material";
@@ -13,7 +14,7 @@ const Logo = () => {
         variant="h5"
         sx={{ marginRight: "4px" }}
       >
-        Adobe
+        Abode
       </Typography>
       <Typography
         color={theme.palette.primary.contrastText}
