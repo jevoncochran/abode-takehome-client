@@ -1,16 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+// Material UI
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import signUpImage from "@assets/sign-up.png";
 import { useTheme } from "@mui/material";
+// Custom Components
 import Logo from "@/components/Logo";
 import InputGrouping from "@/components/inputs/InputGrouping";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import OverlayButton from "@/components/buttons/OverlayButton";
+// Third-party libraries
 import axios from "axios";
+// Redux
 import { useAppDispatch } from "@/redux/hooks";
 import { retrieveUser } from "@/redux/features/auth/authSlice";
+// Router
 import { useNavigate } from "react-router-dom";
+
+import signUpImage from "@assets/sign-up.png";
 
 const SignUpPage = () => {
   const dispatch = useAppDispatch();

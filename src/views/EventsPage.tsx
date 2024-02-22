@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
+// Custom Components
 import ProminentImage from "@/components/ProminentImage";
-import mainImg from "@assets/main-img.png";
+import EventCard from "@/components/events/EventCard";
+// Material UI
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material";
-import EventCard from "@/components/events/EventCard";
+// Third-party Libraries
 import axios from "axios";
+// Redux
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
+// Types
 import { ExistingEvent } from "@/types/custom";
+
+import mainImg from "@assets/main-img.png";
 
 const EventsPage = () => {
   const theme = useTheme();

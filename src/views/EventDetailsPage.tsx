@@ -1,13 +1,19 @@
+// Custom Components
 import ProminentImage from "@/components/ProminentImage";
+import OverlayButton from "@/components/buttons/OverlayButton";
+// Material UI
 import Box from "@mui/material/Box";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material";
+// Router
 import { useNavigate } from "react-router-dom";
+// Redux
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
+// Utilities
 import { formatDateTime, formatTime } from "@/utils/formatDateTime";
-import OverlayButton from "@/components/buttons/OverlayButton";
+// Types
 import { ExistingEvent } from "@/types/custom";
 
 const EventDetailsPage = () => {

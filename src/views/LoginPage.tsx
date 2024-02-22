@@ -1,16 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+// Material UI
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import loginImage from "@assets/login.png";
 import { useTheme } from "@mui/material";
+// Custom Components
 import Logo from "@/components/Logo";
 import InputGrouping from "@/components/inputs/InputGrouping";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import OverlayButton from "@/components/buttons/OverlayButton";
+// Third-party Libraries
 import axios from "axios";
+// Redux
 import { useAppDispatch } from "@/redux/hooks";
 import { retrieveUser } from "@/redux/features/auth/authSlice";
+// Router
 import { useNavigate } from "react-router-dom";
+
+import loginImage from "@assets/login.png";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();

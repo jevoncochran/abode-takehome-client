@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
+// Material UI
 import Navbar from "@components/Navbar";
 import Box from "@mui/material/Box";
+// Redux
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 

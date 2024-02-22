@@ -1,20 +1,15 @@
 import { FormEvent, useState, useEffect, useRef, ChangeEvent } from "react";
+// Custom components
+import InputGrouping from "@/components/inputs/InputGrouping";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
+import DeleteButton from "../buttons/DeleteButton";
+// Material-UI components
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import InputGrouping from "@/components/inputs/InputGrouping";
-import { EventInput, NewEvent, ExistingEvent, UniqueId } from "@/types/custom";
 import InputLabel from "@mui/material/InputLabel";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import dayjs from "dayjs";
 import { TextareaAutosize as Textarea } from "@mui/base/TextareaAutosize";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
-import axios from "axios";
-import { useAppSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import { useNavigate } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/AutoComplete";
 import TextField from "@mui/material/TextField";
@@ -23,7 +18,17 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import DeleteButton from "../buttons/DeleteButton";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+// Third-party libraries
+import dayjs from "dayjs";
+import axios from "axios";
+// Types
+import { EventInput, NewEvent, ExistingEvent } from "@/types/custom";
+// Redux
+import { useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
+import { useNavigate } from "react-router-dom";
 
 type EventFormType = "create" | "edit";
 

@@ -1,7 +1,11 @@
+// Custom Components
 import EventForm from "@/components/events/EventForm";
+// Redux
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
+// Types
 import { ExistingEvent } from "@/types/custom";
+// Third-party Libraries
 import dayjs from "dayjs";
 
 const EditEventPage = () => {

@@ -1,11 +1,16 @@
+// Material UI
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+// Types
 import { ExistingEvent } from "@/types/custom";
+// Utilities
 import { formatDateTime } from "@/utils/formatDateTime";
+// React Router
 import { useNavigate } from "react-router-dom";
+// Redux
 import { useAppDispatch } from "@/redux/hooks";
 import { setSelectedEvent } from "@/redux/features/event/eventSlice";
 

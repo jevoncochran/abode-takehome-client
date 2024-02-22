@@ -1,10 +1,14 @@
-import Box from "@mui/material/Box";
+// Custom Components
 import Logo from "./Logo";
+import PrimaryButton from "./buttons/PrimaryButton";
+import SecondaryButton from "./buttons/SecondaryButton";
+// Material UI
+import Box from "@mui/material/Box";
+// Redux
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { logout } from "@/redux/features/auth/authSlice";
 import { RootState } from "@/redux/store";
-import PrimaryButton from "./buttons/PrimaryButton";
-import SecondaryButton from "./buttons/SecondaryButton";
+// Router
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
