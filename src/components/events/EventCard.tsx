@@ -30,7 +30,7 @@ const EventCard = ({ event }: Props) => {
 
   return (
     <Grid item xs={3} sx={{ cursor: "pointer" }}>
-      <Card onClick={handleClick} sx={{ padding: "12px" }}>
+      <Card onClick={handleClick} sx={{ height: "300px", padding: "12px" }}>
         <CardMedia
           sx={{ height: 200 }}
           image={
@@ -41,7 +41,13 @@ const EventCard = ({ event }: Props) => {
           title="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="body1" component="div">
+          <Typography
+            gutterBottom
+            variant="body1"
+            component="div"
+            overflow="scroll"
+            height="24px"
+          >
             {event.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
