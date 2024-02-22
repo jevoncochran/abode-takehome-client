@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect, useRef, ChangeEvent } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import InputGrouping from "@/components/inputs/InputGrouping";
-import { EventInput, NewEvent, ExistingEvent } from "@/types/custom";
+import { EventInput, NewEvent, ExistingEvent, UniqueId } from "@/types/custom";
 import InputLabel from "@mui/material/InputLabel";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
@@ -149,12 +149,9 @@ const EventForm = ({ type, event }: Props) => {
 
   const handleConfirmDelete = () => {
     axios
-      .delete(
-        `${import.meta.env.VITE_API_URL}/events/${eventState.id}`,
-        {
-          headers: { Authorization: `Bearer ${auth.token}` },
-        }
-      )
+      .delete(`${import.meta.env.VITE_API_URL}/events/${eventState.id}`, {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      })
       .then((res) => {
         console.log(res.data);
         if (res.status === 204) {
@@ -382,11 +379,13 @@ const EventForm = ({ type, event }: Props) => {
             label={type === "create" ? "Create Event" : "Update Event"}
             width="large"
           />
-          <DeleteButton
-            label="Cancel Event"
-            width="large"
-            onClick={handleDelete}
-          />
+          {type === "edit" && (
+            <DeleteButton
+              label="Cancel Event"
+              width="large"
+              onClick={handleDelete}
+            />
+          )}
         </Box>
 
         {/* Delete Event Modal */}
