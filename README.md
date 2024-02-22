@@ -15,24 +15,57 @@ To set up and run this project, follow these steps:
 
 1. **Clone the Repository:**
 
-git clone [repository_url]
+    `git clone [repository_url]`
 
 2. **Navigate to the Project Directory:**
 
-cd [project_directory]
+    `cd [project_directory]`
 
 3. **Install Dependencies:**
 
-npm i
+    `npm i`
 
 4. **Run the Project:**
 
-npm run dev
+    `npm run dev`
 
 
 5. **Environment Configuration:**
 
-Create a `.env` file in the root directory of the project and add the following line:
+    Create a `.env` file in the root directory of the project and add the following line:
 
-VITE_API_URL=http://localhost:8000/api
+    `VITE_API_URL=http://localhost:8000/api`
+
+# Future Improvements
+
+While the current version of the project provides essential functionality, there are several areas that could be enhanced with more time and resources. Here are some potential improvements and features to consider for future releases:
+
+1. **User Profiles:**
+   Introduce user profiles to allow users to customize their experience and provide additional information.
+
+2. **Real-time Updates:**
+   Implement real-time updates for the dashboard, ensuring users receive immediate notifications about new events or changes.
+
+3. **Enhanced Event Filtering:**
+   Improve event filtering options on the dashboard, allowing users to sort and search for events more efficiently.
+
+4. **Mobile Responsiveness:**
+   Optimize the application for mobile devices to provide a seamless experience across a variety of screen sizes.
+
+5. **Testing and Optimization:**
+   Conduct comprehensive testing and optimization to ensure the application's performance, scalability, and reliability.
+
+6. **Rich Text Event Descriptions:**
+   Allow users to add rich text descriptions when creating events, providing more detailed information.
+
+7. **Calendar Display:**
+   Introduce a calendar view on the events page, enabling users to switch between list view and calendar view for a more visual representation of their scheduled events.
+
+8. **Event Status and Cancellation:**
+   Implement an event status key (e.g., active, completed, canceled) to provide users with more nuanced control over event management. Users can cancel events instead of only deleting them.
+
+9. **Invitation Management:**
+   Allow users to accept or decline event invitations, providing a more interactive and user-friendly approach to managing their event associations.
+
+
 
