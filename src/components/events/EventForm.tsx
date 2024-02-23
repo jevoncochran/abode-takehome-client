@@ -23,7 +23,7 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs from "dayjs";
 import axios from "axios";
 // Types
-import { EventInput, NewEvent, ExistingEvent } from "@/types/custom";
+import { NewEvent, ExistingEvent } from "@/types/custom";
 // Redux
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
@@ -58,7 +58,7 @@ const EventForm = ({ type, event }: Props) => {
 
     // Remove startTime and endTime data for all day events
     if (eventData.isAllDay) {
-      const timesRemoved: EventInput = {
+      const timesRemoved = {
         ...eventData,
         startTime: null,
         endTime: null,
@@ -241,11 +241,7 @@ const EventForm = ({ type, event }: Props) => {
               />
               <FormControlLabel
                 value="end"
-                control={
-                  <Checkbox
-                    checked={eventState.isAllDay}
-                  />
-                }
+                control={<Checkbox checked={eventState.isAllDay} />}
                 label="Check here if this is an all day event"
                 labelPlacement="end"
                 onChange={(e, checked) =>
